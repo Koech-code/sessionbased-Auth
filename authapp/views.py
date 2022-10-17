@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from user_profile.models import UserProfile
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.utils.decorators import method_decorator
-
+from .serializers import UserSerializer
 
 # Create your views here.
 
@@ -114,3 +114,16 @@ class DeleteAccountView(APIView):
 
         except:
             return Response({'error': 'Something went wrong when trying to delete user'})
+
+class GetUsersView(APIView):
+    permission_classes = (permissions.AllowAny, )
+
+    def get(self, request, format=None):
+        users = User.objects.all()
+
+        user_serializer = UserSerializer(users, many=True)
+        return Response(user_serializer.data)
+
+
+
+

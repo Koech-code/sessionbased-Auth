@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from . views import SignUpView, GetCSRFToken, LoginView, LogoutView, CheckAuthenticatedView, DeleteAccountView
+from . views import SignUpView, GetCSRFToken, LoginView, LogoutView, CheckAuthenticatedView, DeleteAccountView, GetUsersView
 from django.urls import path
 
 urlpatterns = [
@@ -10,7 +10,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view()),
     path('status/', CheckAuthenticatedView.as_view()),
     path('delete/', DeleteAccountView.as_view()),
-
+    path('all-users/', GetUsersView.as_view()),
 ]
 
 
