@@ -102,3 +102,15 @@ class GetCSRFToken(APIView):
 
     def get(self, request, format=None):
         return Response({'success': 'CSRF cookie set'})
+
+
+class DeleteAccountView(APIView):
+    def delete(self, request, format=None):
+        user = self.request.user
+        try:
+            get_user = User.objects.filter(id=user.id).delete()
+
+            return Response({'succes': 'User deleted successfully!'})
+
+        except:
+            return Response({'error': 'Something went wrong when trying to delete user'})
